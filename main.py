@@ -22,7 +22,6 @@ update_menu_parser.add_argument("--price", type=float, help=" price of the menu 
 delete_menu_parser = menu_subparsers.add_parser("delete", help="Delete a menu item")
 delete_menu_parser.add_argument("id", type=int, help="id of the menu item to delete")
 
-# Order commands
 order_parser = subparsers.add_parser("order", help="Manage orders")
 order_subparsers = order_parser.add_subparsers(dest="order_command", help="Order commands")
 
