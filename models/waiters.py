@@ -7,5 +7,5 @@ class Waiters(Staff):
     id = Column(Integer, ForeignKey('staff.id'), primary_key=True)
     section = Column(String(30), nullable=True)
     __mapper_args__ = {
-        "polymorphic_identity": "waiters",
+        'polymorphic_identity': 'waiters',
     }
