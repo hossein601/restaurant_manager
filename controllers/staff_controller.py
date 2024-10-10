@@ -8,7 +8,6 @@ class StaffController:
     def make_new_staff(self,name, position, section=None, specialty=None):
         if position.lower() == 'chef':
             new_staff = Chef(name=name, position=position, specialty=specialty)
-
         elif position.lower() == 'waiters':
             new_staff = Waiters(name=name, position=position, section=section)
         else:
@@ -17,8 +16,10 @@ class StaffController:
         db.commit()
         return new_staff
 
+
     def get_staff(self):
         return db.query(Staff).all()
+
 
     def update_staff(self ,staff_id, name=None, position=None, section=None, specialty=None):
         staff_member = db.query(Staff).filter_by(id=staff_id).first()
@@ -32,11 +33,10 @@ class StaffController:
             staff_member.section = section
         if specialty and isinstance(staff_member, Chef):
             staff_member.specialty = specialty
-
         db.add(staff_member)
         db.commit()
-
         return staff_member
+
 
     def delete_staff(staff_id):
         staff_member = db.query(Staff).filter_by(id=staff_id).first()

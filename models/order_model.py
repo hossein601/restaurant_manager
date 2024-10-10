@@ -11,5 +11,4 @@ class Order(Base):
     staff_id = Column(Integer, ForeignKey('staff.id'))
 
     staff = relationship('Staff', back_populates='orders')
-
     menu_items = relationship('OrderMenu', back_populates='order')
