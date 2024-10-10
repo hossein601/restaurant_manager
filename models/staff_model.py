@@ -5,7 +5,7 @@ from models.base_model import Base
 
 class Staff(Base):
     __tablename__ = 'staff'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     position = Column(String, nullable=False)
     type = Column(String)

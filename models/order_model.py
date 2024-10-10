@@ -5,7 +5,7 @@ from models.base_model import Base
 class Order(Base):
     __tablename__ = 'orders'
 
-    order_id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, primary_key=True)
     customer = Column(String, nullable=False)
     total_price = Column(Float, nullable=False)
     staff_id = Column(Integer, ForeignKey('staff.id'))
