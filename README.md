@@ -1,8 +1,7 @@
 
 ## **Restaurant Manager System**
 
-This is resturant manager that have 4 base fetures menu,reserve,staff,order.y
-## **Introduction**
+This is a restaurant management system that has four main features: menu, reservations, staff, and orders.## **Introduction**
 
 This is resturant manager that have 4 base calss menu,reserve,staff,order.They include CRUD features for create, read ,update,delete instance each  of each object.
 
