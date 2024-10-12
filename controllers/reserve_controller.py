@@ -20,9 +20,6 @@ class ReserveController:
     def get_all_reservations():
         return db.query(Reserve).all()
 
-    @staticmethod
-    def get_reservation(reservation_id):
-        return db.query(Reserve).filter_by(id=reservation_id).first()
 
     @staticmethod
     def update_reservation( reservation_id, name=None, numbers=None, duration=None, staff_id=None):
@@ -50,7 +47,7 @@ class ReserveController:
     def delete_reservation( reservation_id):
         reserve = db.query(Reserve).filter_by(id=reservation_id).first()
         if not reserve:
-            return (f'reservation  {reservation_id} not found.')
+            return f'reservation  {reservation_id} not found.'
 
         db.delete(reserve)
         db.commit()
