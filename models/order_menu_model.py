@@ -8,6 +8,6 @@ class OrderMenu(Base):
 
     id = Column(Integer, primary_key=True)
     menu_id = Column(Integer, ForeignKey('menu.id'))
-    order_id = Column(Integer, ForeignKey('orders.order_id'))
+    order_id = Column(Integer, ForeignKey('orders.id'))
     order = relationship('Order', back_populates='menu_items')
     menu = relationship('Menu', back_populates='orders')

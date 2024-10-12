@@ -8,9 +8,9 @@ from models.base_model import Base, engine
 parser = argparse.ArgumentParser(description="Manage restaurant operations.")
 subparsers = parser.add_subparsers(dest="command", help=" commands")
 
+
 menu_parser = subparsers.add_parser("menu", help="Manage  items")
 menu_subparsers = menu_parser.add_subparsers(dest="menu_command", help="Menu commands")
-
 menu_subparsers.add_parser("list", help="List all menu items")
 add_menu_parser = menu_subparsers.add_parser("add", help="Add a new menu item")
 add_menu_parser.add_argument("name", type=str, help="Name of the menu item")
@@ -22,9 +22,9 @@ update_menu_parser.add_argument("--price", type=float, help=" price of the menu 
 delete_menu_parser = menu_subparsers.add_parser("delete", help="Delete a menu item")
 delete_menu_parser.add_argument("id", type=int, help="id of the menu item to delete")
 
+
 order_parser = subparsers.add_parser("order", help="Manage orders")
 order_subparsers = order_parser.add_subparsers(dest="order_command", help="Order commands")
-
 order_subparsers.add_parser("list", help="List all orders")
 add_order_parser = order_subparsers.add_parser("add", help="Create a new order")
 add_order_parser.add_argument("customer", type=str, help="Customer name")
@@ -39,9 +39,9 @@ update_order_parser.add_argument("--total_price", type=float, help="Updated tota
 delete_order_parser = order_subparsers.add_parser("delete", help="Delete an order")
 delete_order_parser.add_argument("id", type=int, help="ID of the order to delete")
 
+
 reserve_parser = subparsers.add_parser("reserve", help="Manage reservations")
 reserve_subparsers = reserve_parser.add_subparsers(dest="reserve_command", help="Reserve commands")
-
 reserve_subparsers.add_parser("list", help="List all reservations")
 add_reserve_parser = reserve_subparsers.add_parser("add", help="Create a new reservation")
 add_reserve_parser.add_argument("name", type=str, help="Name of the person making the reservation")
@@ -57,9 +57,9 @@ update_reserve_parser.add_argument("--staff_id", type=int, help="Updated staff I
 delete_reserve_parser = reserve_subparsers.add_parser("delete", help="Delete a reservation")
 delete_reserve_parser.add_argument("id", type=int, help="ID of the reservation to delete")
 
+
 staff_parser = subparsers.add_parser("staff", help="Manage staff")
 staff_subparsers = staff_parser.add_subparsers(dest="staff_command", help="Staff commands")
-
 staff_subparsers.add_parser("list", help="List all staff members")
 add_staff_parser = staff_subparsers.add_parser("add", help="Add a new staff member")
 add_staff_parser.add_argument("name", type=str, help="Name of the staff member")
@@ -67,11 +67,11 @@ add_staff_parser.add_argument("position", type=str, help="Position of the staff 
 add_staff_parser.add_argument("--section", type=str, help="Section (if applicable)")
 add_staff_parser.add_argument("--specialty", type=str, help="Specialty (if applicable)")
 update_staff_parser = staff_subparsers.add_parser("update", help="Update an existing staff member")
-update_staff_parser.add_argument("id", type=int, help="ID of the staff member")
-update_staff_parser.add_argument("--name", type=str, help="Updated name")
-update_staff_parser.add_argument("--position", type=str, help="Updated position")
-update_staff_parser.add_argument("--section", type=str, help="Updated section")
-update_staff_parser.add_argument("--specialty", type=str, help="Updated specialty")
+update_staff_parser.add_argument("id", type=int, help="id of the staff member")
+update_staff_parser.add_argument("--name", type=str, help="update name")
+update_staff_parser.add_argument("--position", type=str, help="update position")
+update_staff_parser.add_argument("--section", type=str, help="update section")
+update_staff_parser.add_argument("--specialty", type=str, help="update specialty")
 delete_staff_parser = staff_subparsers.add_parser("delete", help="Delete a staff member")
 delete_staff_parser.add_argument("id", type=int, help="ID of the staff member to delete")
 

@@ -1,14 +1,19 @@
 from models.base_model import SessionLocal
 from models.chef import Chef
 from models.staff_model import Staff
-from models.waiters import Waiters
+from models.waiter import Waiters
+
+
 db = SessionLocal()
 
 class StaffController:
-    def make_new_staff(self,name, position, section=None, specialty=None):
+    @staticmethod
+    def make_new_staff(name: str, position: str, section=None, specialty=None):
         if position.lower() == 'chef':
+            #if position is chef , add chef to our database
             new_staff = Chef(name=name, position=position, specialty=specialty)
-        elif position.lower() == 'waiters':
+        elif position.lower() == 'waiter':
+            #if position is waiters , add waiters to our database
             new_staff = Waiters(name=name, position=position, section=section)
         else:
             new_staff = Staff(name=name, position=position)
@@ -16,15 +21,15 @@ class StaffController:
         db.commit()
         return new_staff
 
-
-    def get_staff(self):
+    @staticmethod
+    def get_staff():
         return db.query(Staff).all()
 
-
-    def update_staff(self ,staff_id, name=None, position=None, section=None, specialty=None):
+    @staticmethod
+    def update_staff(staff_id, name=None, position=None, section=None, specialty=None):
         staff_member = db.query(Staff).filter_by(id=staff_id).first()
         if not staff_member:
-            return 'staff not found'
+            return ValueError('staff not found')
         if name:
             staff_member.name = name
         if position:
@@ -37,7 +42,7 @@ class StaffController:
         db.commit()
         return staff_member
 
-
+    @staticmethod
     def delete_staff(staff_id):
         staff_member = db.query(Staff).filter_by(id=staff_id).first()
         if staff_member:
