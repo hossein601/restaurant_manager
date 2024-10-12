@@ -10,15 +10,14 @@ class StaffController:
     @staticmethod
     def make_new_staff(name: str, position: str, section=None, specialty=None):
         if position.lower() == 'chef':
-            #if position is chef , add chef to our database
             new_staff = Chef(name=name, position=position, specialty=specialty)
         elif position.lower() == 'waiter':
-            #if position is waiters , add waiters to our database
             new_staff = Waiters(name=name, position=position, section=section)
         else:
             new_staff = Staff(name=name, position=position)
         db.add(new_staff)
         db.commit()
+
         return new_staff
 
     @staticmethod
@@ -29,7 +28,8 @@ class StaffController:
     def update_staff(staff_id, name=None, position=None, section=None, specialty=None):
         staff_member = db.query(Staff).filter_by(id=staff_id).first()
         if not staff_member:
-            return ValueError('staff not found')
+            return 'staff not found'
+
         if name:
             staff_member.name = name
         if position:
@@ -40,6 +40,7 @@ class StaffController:
             staff_member.specialty = specialty
         db.add(staff_member)
         db.commit()
+
         return staff_member
 
     @staticmethod
@@ -48,5 +49,7 @@ class StaffController:
         if staff_member:
             db.delete(staff_member)
             db.commit()
+
             return 'staff deleted'
+
         return 'staff not found'
