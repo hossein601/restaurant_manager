@@ -1,18 +1,14 @@
 from models.menu_model import Menu
-from models.base_model import SessionLocal
-
-
-db=SessionLocal()
+from models.base_model import db
 
 class MenuController:
 
     @staticmethod
     def get_menu_items():
-
         return db.query(Menu).all()
 
     @staticmethod
-    def add_menu_item( name, price):
+    def add_menu_item(name, price):
         new_item = Menu(item=name, price=price)
         db.add(new_item)
         db.commit()
@@ -20,8 +16,8 @@ class MenuController:
         return new_item
 
     @staticmethod
-    def delete_menu_item( food_id):
-        item = SessionLocal.query(Menu).filter_by(id=food_id).first()
+    def delete_menu_item(food_id):
+        item = db.query(Menu).filter_by(id=food_id).first()
         if item:
             db.delete(item)
             db.commit()

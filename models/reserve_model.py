@@ -5,11 +5,11 @@ from sqlalchemy.orm import relationship
 from models.base_model import Base
 
 class Reserve(Base):
-    __tablename__ = 'reservation'
+    __tablename__ = 'reservations'
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     numbers = Column(Integer, nullable=False)
     duration = Column(String, nullable=False)
     staff_id = Column(Integer, ForeignKey('staff.id'))
-    staff = relationship('Staff', back_populates='reservation')
+    staff = relationship('Staff', back_populates='reservations')

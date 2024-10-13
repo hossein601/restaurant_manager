@@ -1,10 +1,8 @@
-from models.base_model import SessionLocal
+from models.base_model import db
 from models.chef import Chef
 from models.staff_model import Staff
 from models.waiter import Waiters
 
-
-db = SessionLocal()
 
 class StaffController:
     @staticmethod
@@ -34,11 +32,10 @@ class StaffController:
             staff_member.name = name
         if position:
             staff_member.position = position
-        if section and isinstance(staff_member, Waiters):
+        if section:
             staff_member.section = section
-        if specialty and isinstance(staff_member, Chef):
+        if specialty:
             staff_member.specialty = specialty
-        db.add(staff_member)
         db.commit()
 
         return staff_member

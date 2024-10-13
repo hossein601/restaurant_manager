@@ -1,13 +1,12 @@
 from models.reserve_model import Reserve
-from models.base_model import SessionLocal
+from models.base_model import db
 from models.staff_model import Staff
 
-db = SessionLocal()
 
 class ReserveController:
 
     @staticmethod
-    def make_reservation( name, numbers, duration, staff_id):
+    def make_reservation(name, numbers, duration, staff_id):
         staff = db.query(Staff).filter_by(id=staff_id).first()
         if not staff:
             raise ValueError(f'staff  {staff_id} not found.')
@@ -19,7 +18,6 @@ class ReserveController:
     @staticmethod
     def get_all_reservations():
         return db.query(Reserve).all()
-
 
     @staticmethod
     def update_reservation( reservation_id, name=None, numbers=None, duration=None, staff_id=None):
