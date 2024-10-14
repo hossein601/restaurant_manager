@@ -14,7 +14,6 @@ First should install requirement.txt. Then create new database and add yoour dat
 pip install psycopg2-binary
 pip install SQLAlchemy
 pip install python-dotenv
-sudo apt install postgresql
 ```
 ## Usage
 First install database and create new database with your specific username and password,add it to file 'base_model'
