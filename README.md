@@ -24,3 +24,37 @@ First install database and create new database with your specific username and p
 python main.py -h
 
 ```
+### from source
+```bash
+git clone https://github.com/hossein601/restaurant_manager.git
+cd restaurant
+pip install -e .
+```
+
+## CLI
+```bash
+>python main.py -h
+usage: main.py [-h] {menu,order,reserve,staff} ...
+options:
+  -h, --help            show this help message and exit
+positional arguments:
+  {menu,order,reserve,staff}
+                        commands
+    menu                Manage items
+    order               Manage orders
+    reserve             Manage reservations
+    staff               Manage staff
+```
+```bash
+python main.py menu -h
+options:
+  -h, --help            show this help message and exit
+positional arguments:
+  {list,add,update,delete,filter}
+                        Menu commands
+    list                List all menu items
+    add                 Add a new menu item
+    update              Update menu item
+    delete              Delete a menu item
+    filter              Filter menu items
+```
