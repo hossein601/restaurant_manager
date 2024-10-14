@@ -1,18 +1,12 @@
 import argparse
-
-
 from controllers.menu_controller import MenuController
 from controllers.order_controller import OrderController
 from controllers.reserve_controller import ReserveController
 from controllers.staff_controller import StaffController
-from models.base_model import Base, engine
-
-
 
 
 parser = argparse.ArgumentParser(description="Manage restaurant operations.")
 subparsers = parser.add_subparsers(dest="command", help=" commands")
-
 menu_parser = subparsers.add_parser("menu", help="Manage  items")
 menu_subparsers = menu_parser.add_subparsers(dest="menu_command", help="Menu commands")
 menu_subparsers.add_parser("list", help="List all menu items")
@@ -79,23 +73,27 @@ update_staff_parser.add_argument("--specialty", type=str, help="update specialty
 delete_staff_parser = staff_subparsers.add_parser("delete", help="Delete a staff member")
 delete_staff_parser.add_argument("id", type=int, help="ID of the staff member to delete")
 
-args = parser.parse_args()
 
+args = parser.parse_args()
 if args.command == "menu":
     menu_controller = MenuController()
     if args.menu_command == "list":
         items = menu_controller.get_menu_items()
         for item in items:
             print(f"{item.id}: {item.item} - {item.price}")
+
     elif args.menu_command == "add":
         menu_controller.add_menu_item(args.name, args.price)
         print(f"Menu item {args.name} added.")
+
     elif args.menu_command == "update":
         updated_item = menu_controller.update_menu_item(args.id, args.name, args.price)
         print(f"Menu item {updated_item} updated.")
+
     elif args.menu_command == "delete":
         message = menu_controller.delete_menu_item(args.id)
         print(message)
+
 
 elif args.command == "order":
     order_controller = OrderController()
@@ -103,12 +101,15 @@ elif args.command == "order":
         orders = order_controller.list_orders()
         for order in orders:
             print(f"Order {order.order_id}: {order.customer} - {order.total_price}")
+
     elif args.order_command == "add":
         new_order = order_controller.create_order(args.customer, args.menu_items, args.total_price, args.staff_id)
         print(f"Order {new_order} created.")
+
     elif args.order_command == "update":
         updated_order = order_controller.update_order(args.id, args.menu_items, args.customer, args.total_price)
         print(f"Order {updated_order.order_id} updated.")
+
     elif args.order_command == "delete":
         message = order_controller.delete_order(args.id)
         print(message)
@@ -119,12 +120,15 @@ elif args.command == "reserve":
         reserves = reserve_controller.get_all_reservations()
         for reserve in reserves:
             print(f"Reservation {reserve.id}: {reserve.name} - {reserve.numbers} people")
+
     elif args.reserve_command == "add":
         new_reserve = reserve_controller.make_reservation(args.name, args.numbers, args.duration, args.staff_id)
         print(f"Reservation {new_reserve.id} created.")
+
     elif args.reserve_command == "update":
         updated_reserve = reserve_controller.update_reservation(args.id, args.name, args.numbers, args.duration, args.staff_id)
         print(f"Reservation {updated_reserve.id} updated.")
+
     elif args.reserve_command == "delete":
         message = reserve_controller.delete_reservation(args.id)
         print(message)
@@ -135,12 +139,15 @@ elif args.command == "staff":
         staff_members = staff_controller.get_staff()
         for staff in staff_members:
             print(f"{staff.id}: {staff.name} - {staff.position}")
+
     elif args.staff_command == "add":
         new_staff = staff_controller.make_new_staff(args.name, args.position, args.section, args.specialty)
         print(f"Staff member {new_staff.name} added.")
+
     elif args.staff_command == "update":
         updated_staff = staff_controller.update_staff(args.id, args.name, args.position, args.section, args.specialty)
         print(f"Staff member {updated_staff} updated.")
+
     elif args.staff_command == "delete":
         message = staff_controller.delete_staff(args.id)
         print(message)
