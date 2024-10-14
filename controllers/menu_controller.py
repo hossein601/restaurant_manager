@@ -39,7 +39,7 @@ class MenuController:
             return f'{food_id} was updated.'
 
         return f'{food_id} not found.'
-    gi
+
     @staticmethod
     def filter_by_name(food_name):
         food_item =db.query(Menu).filter(Menu.item==food_name)
