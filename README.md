@@ -18,7 +18,7 @@ sudo apt install postgresql
 ```
 ## Usage
 First install database and create new database with your specific username and password,add it to file 'base_model'
-###Manage restaurant operations.
+
 
 ```
 #Manage restaurant operations
