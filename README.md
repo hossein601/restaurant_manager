@@ -18,11 +18,12 @@ sudo apt install postgresql
 ```
 ## Usage
 First install database and create new database with your specific username and password,add it to file 'base_model'
-```python
-import foobar
+###Manage restaurant operations.
 
-# returns 'words'
-foobar.pluralize('word')
+```
+#Manage restaurant operations
+python main.py -h
+
 
 # returns 'geese'
 foobar.pluralize('goose')
