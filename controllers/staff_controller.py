@@ -1,5 +1,6 @@
 from models.base_model import db
 from models.chef import Chef
+from models.order_model import Order
 from models.staff_model import Staff
 from models.waiter import Waiters
 
@@ -24,7 +25,7 @@ class StaffController:
 
     @staticmethod
     def update_staff(staff_id, name=None, position=None, section=None, specialty=None):
-        staff_member = db.query(Staff).filter_by(id=staff_id).first()
+        staff_member = db.query(Staff).filter_by(id=staff_id).one_or_none()
         if not staff_member:
             return 'staff not found'
 
@@ -42,7 +43,7 @@ class StaffController:
 
     @staticmethod
     def delete_staff(staff_id):
-        staff_member = db.query(Staff).filter_by(id=staff_id).first()
+        staff_member = db.query(Staff).filter_by(id=staff_id).one_or_none()
         if staff_member:
             db.delete(staff_member)
             db.commit()
@@ -50,3 +51,7 @@ class StaffController:
             return 'staff deleted'
 
         return 'staff not found'
+    @staticmethod
+    def filter_staff_assigned_to_orders(staff_name):
+        staff_order = db.query(Staff,Order).join(Order).filter(Staff.name == staff_name).all()
+        return staff_order

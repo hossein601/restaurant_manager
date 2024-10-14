@@ -9,18 +9,18 @@ class OrderController:
 
     @staticmethod
     def get_order(order_id):
-        order = db.query(OrderMenu).filter_by(id=order_id).first()
+        order = db.query(OrderMenu).filter_by(id=order_id).one_or_none()
         return order
 
     @staticmethod
     def create_order(customer:str,menu_items: list, total_price: int, staff_id):
-        staff = db.query(Staff).filter_by(id=staff_id).first()
+        staff = db.query(Staff).filter_by(id=staff_id).one_or_none()
         if not staff:
             return f'staff not founded with this{staff_id}'
 
         new_menu_item = []
         for item_id in menu_items:
-            menu_item = db.query(Menu).filter_by(item=item_id).first()
+            menu_item = db.query(Menu).filter_by(item=item_id).one_or_none()
             if not menu_item:
                 return f'menu item not founded with this{item_id}'
 
@@ -35,7 +35,7 @@ class OrderController:
 
     @staticmethod
     def update_order( order_id, menu_items: list = None, customer: str = None, total_price: float = None):
-        order = db.query(Order).filter_by(order_id=order_id).first()
+        order = db.query(Order).filter_by(order_id=order_id).one_or_none()
         if not order:
             return f'order  {order_id} not found.'
 
@@ -46,20 +46,20 @@ class OrderController:
         if menu_items:
             db.query(OrderMenu).filter_by(order_id=order_id).delete()
             for item_id in menu_items:
-                menu_item = db.query(Menu).filter_by(id=item_id).first()
+                menu_item = db.query(Menu).filter_by(id=item_id).one_or_none()
                 if not menu_item:
                     return  f'menu item {item_id} not found.'
-                order_menu = OrderMenu(order_id=order_id, menu_id=menu_item.id)
-                db.add()
+
         db.commit()
 
         return order
 
     @staticmethod
     def delete_order(order_id):
-        order = db.query(Order).filter_by(id=order_id).first()
+        order = db.query(Order).filter_by(id=order_id).ne_or_none()
         if not order:
             return f'order  {order_id} not found.'
+
         db.query(OrderMenu).filter_by(id=order_id).delete()
         db.delete(order)
         db.commit()

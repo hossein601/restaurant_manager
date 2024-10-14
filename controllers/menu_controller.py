@@ -17,7 +17,7 @@ class MenuController:
 
     @staticmethod
     def delete_menu_item(food_id):
-        item = db.query(Menu).filter_by(id=food_id).first()
+        item = db.query(Menu).filter_by(id=food_id).one_or_none()
         if item:
             db.delete(item)
             db.commit()
@@ -28,7 +28,7 @@ class MenuController:
 
     @staticmethod
     def update_menu_item(food_id, name, price):
-        new_item = db.query(Menu).filter_by(id=food_id).first()
+        new_item = db.query(Menu).filter_by(id=food_id).one_or_none()
         if new_item:
             if name:
                 new_item.name = name
@@ -39,5 +39,18 @@ class MenuController:
             return f'{food_id} was updated.'
 
         return f'{food_id} not found.'
+    gi
+    @staticmethod
+    def filter_by_name(food_name):
+        food_item =db.query(Menu).filter(Menu.item==food_name)
+        item = ''
+        if food_item:
+            for food in food_item:
+                item += f'{food.id}. {food.item}. {food.price}\n'
+            return item
+
+        return f'{food_name} not found.'
+
+
 
 
