@@ -11,8 +11,22 @@ First should install requirement.txt. Then create new database and add yoour dat
 
 
 ```bash
-pip install psycopg2
+pip install psycopg2-binary
 pip install SQLAlchemy
-pip install
+pip install python-dotenv
 sudo apt install postgresql
+```
+## Usage
+First install database and create new database with your specific username and password,add it to file 'base_model'
+```python
+import foobar
+
+# returns 'words'
+foobar.pluralize('word')
+
+# returns 'geese'
+foobar.pluralize('goose')
+
+# returns 'phenomenon'
+foobar.singularize('phenomena')
 ```
