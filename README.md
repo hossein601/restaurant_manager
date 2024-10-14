@@ -21,7 +21,7 @@ First install database and create new database with your specific username and p
 
 
 ```
-#Manage restaurant operations
+Manage restaurant operations
 python main.py -h
 
 ```
