@@ -9,3 +9,19 @@ This is resturant manager that have 4 base calss menu,reserve,staff,order.They i
 
 First should install requirement.txt. Then create new database and add yoour database. create your own database.
 
+
+```bash
+pip install psycopg2-binary
+pip install SQLAlchemy
+pip install python-dotenv
+sudo apt install postgresql
+```
+## Usage
+First install database and create new database with your specific username and password,add it to file 'base_model'
+
+
+```
+#Manage restaurant operations
+python main.py -h
+
+```
