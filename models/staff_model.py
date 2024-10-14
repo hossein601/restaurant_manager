@@ -10,7 +10,7 @@ class Staff(Base):
     name = Column(String, nullable=False)
     position = Column(String, nullable=False)
     type = Column(String)
-    orders = relationship('Order', back_populates='staff')
+    orders = relationship('Order', back_populates='')
     reservations = relationship('Reserve', back_populates='staff')
 
     __mapper_args__ = {

@@ -14,7 +14,7 @@ class OrderController:
 
     @staticmethod
     def create_order(customer:str,menu_items: list, total_price: int, staff_id):
-        staff = db.query(Staff).filter_by(id = staff_id).first()
+        staff = db.query(Staff).filter_by(id=staff_id).first()
         if not staff:
             return f'staff not founded with this{staff_id}'
 
@@ -52,6 +52,7 @@ class OrderController:
                 order_menu = OrderMenu(order_id=order_id, menu_id=menu_item.id)
                 db.add()
         db.commit()
+
         return order
 
     @staticmethod
