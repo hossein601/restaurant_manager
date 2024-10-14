@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-
 from models.staff_model import Staff
+
 
 class Waiters(Staff):
     __tablename__ = 'waiter'

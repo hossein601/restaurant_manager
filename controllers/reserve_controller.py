@@ -20,7 +20,7 @@ class ReserveController:
         return db.query(Reserve).all()
 
     @staticmethod
-    def update_reservation( reservation_id, name=None, numbers=None, duration=None, staff_id=None):
+    def update_reservation(reservation_id, name=None, numbers=None, duration=None, staff_id=None):
         reserve = db.query(Reserve).filter_by(id=reservation_id).first()
         if not reserve:
             return f'reservation {reservation_id} not found.'
@@ -42,7 +42,7 @@ class ReserveController:
         return reserve
 
     @staticmethod
-    def delete_reservation( reservation_id):
+    def delete_reservation(reservation_id):
         reserve = db.query(Reserve).filter_by(id=reservation_id).first()
         if not reserve:
             return f'reservation  {reservation_id} not found.'

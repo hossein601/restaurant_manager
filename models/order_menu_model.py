@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-
 from models.base_model import Base
+
 
 class OrderMenu(Base):
     __tablename__ = 'order_menu'
