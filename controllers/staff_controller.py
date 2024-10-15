@@ -47,7 +47,6 @@ class StaffController:
         if staff_member:
             db.delete(staff_member)
             db.commit()
-
             return 'staff deleted'
 
         return 'staff not found'
