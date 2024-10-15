@@ -3,8 +3,9 @@ from controllers.menu_controller import MenuController
 from controllers.order_controller import OrderController
 from controllers.reserve_controller import ReserveController
 from controllers.staff_controller import StaffController
+from models.base_model import engine, Base
 
-
+Base.metadata.create_all(engine)
 parser = argparse.ArgumentParser(description='Manage restaurant operations.')
 subparsers = parser.add_subparsers(dest='command', help='commands')
 menu_parser = subparsers.add_parser('menu', help='Manage  items')
@@ -28,7 +29,8 @@ order_subparsers = order_parser.add_subparsers(dest='order_command', help='Order
 order_subparsers.add_parser('list', help='List all orders')
 add_order_parser = order_subparsers.add_parser('add', help='Create a new order')
 add_order_parser.add_argument('customer', type=str, help='Customer name')
-add_order_parser.add_argument('menu_items', nargs='+', type=str, help='List of menu item IDs')
+add_order_parser.add_argument('menu_items', type = str, help='List of menu item')
+parser.add_argument('-l', '--list', help='delimited list input', type=str)
 add_order_parser.add_argument('total_price', type=float, help='Total price of the order')
 add_order_parser.add_argument('staff_id', type=int, help='Staff ID')
 update_order_parser = order_subparsers.add_parser('update', help='Update an existing order')

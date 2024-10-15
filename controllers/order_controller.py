@@ -8,26 +8,21 @@ from models.staff_model import Staff
 class OrderController:
 
     @staticmethod
-    def get_order(order_id):
-        order = db.query(OrderMenu).filter_by(id=order_id).one_or_none()
-        return order
-
-    @staticmethod
-    def create_order(customer:str,menu_items: list, total_price: int, staff_id):
+    def create_order(customer , menu_items, total_price, staff_id):
         staff = db.query(Staff).filter_by(id=staff_id).one_or_none()
         if not staff:
-            return f'staff not founded with this{staff_id}'
+            return f'Staff not found {staff_id}'
 
-        new_menu_item = []
-        for item_id in menu_items:
-            menu_item = db.query(Menu).filter_by(item=item_id).one_or_none()
-            if not menu_item:
-                return f'menu item not founded with this{item_id}'
+        new_menu_items = []
+        for item_order in menu_items:
+            menu_item = db.query(Menu).filter_by(item=item_order).first()
+            new_menu_items.append(menu_item)
+        if len(new_menu_items) == 0:
+            return f'Menu item not found {menu_items}'
 
-            new_menu_item.append(menu_item)
+        new_order = Order(customer=customer, total_price=total_price, staff_id=staff_id)
 
-        new_order =Order(customer=customer,total_price=total_price,staff_id=staff_id)
-        new_order.menu_items.extend(new_menu_item)
+        new_order.menu_items.extend(new_menu_items)
         db.add(new_order)
         db.commit()
 
@@ -56,7 +51,7 @@ class OrderController:
 
     @staticmethod
     def delete_order(order_id):
-        order = db.query(Order).filter_by(id=order_id).ne_or_none()
+        order = db.query(Order).filter_by(id=order_id).first()
         if not order:
             return f'order  {order_id} not found.'
 

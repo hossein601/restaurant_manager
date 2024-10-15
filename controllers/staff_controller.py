@@ -51,6 +51,7 @@ class StaffController:
             return 'staff deleted'
 
         return 'staff not found'
+
     @staticmethod
     def filter_staff_assigned_to_orders(staff_name):
         staff_order = db.query(Staff,Order).join(Order).filter(Staff.name == staff_name).all()
