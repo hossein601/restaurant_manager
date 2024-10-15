@@ -20,6 +20,11 @@ First install database and create new database with your specific username and p
 sudo -u postgres psql
 sudo -u postgres createdb <dbname>
 ```
+Create '.env' file wirte 
+```bash
+DATABASE_URL=postgresql+psycopg2://postgres:<password>@localhost/<dbname>
+```
+
 
 
 ### from source
