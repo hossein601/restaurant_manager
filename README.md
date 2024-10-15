@@ -38,6 +38,7 @@ positional arguments:
     order               Manage orders
     reserve             Manage reservations
     staff               Manage staff
+
 ```
 ```bash
 >python main.py menu -h
@@ -52,6 +53,7 @@ positional arguments:
     update              Update menu item
     delete              Delete a menu item
     filter              Filter menu items
+
 ```
 ```bash
 >python main.py order -h
@@ -66,20 +68,22 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
+
 ```
 ```bash
 >python main.py reserve -h
 
 positional arguments:
-  {menu,order,reserve,staff}
-                        commands
-    menu                Manage items
-    order               Manage orders
-    reserve             Manage reservations
-    staff               Manage staff
+  {list,add,update,delete}
+                        Reserve commands
+    list                List all reservations
+    add                 Create a new reservation
+    update              Update an existing reservation
+    delete              Delete a reservation
 
 options:
-  -h, --help            show this help message and exit      
+  -h, --help            show this help message and exit
+      
 ```
 ```bash
 >python main.py staff -h
@@ -94,6 +98,7 @@ positional arguments:
     filter              staff for each order
 
 options:
-  -h, --help            show this help message and exit     
+  -h, --help            show this help message and exit
+
 ```
 
