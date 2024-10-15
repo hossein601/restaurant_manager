@@ -16,12 +16,17 @@ pip install python-dotenv
 ```
 ## Usage
 First install database and create new database with your specific username and password,add it to file 'base_model'
+```bash
+sudo -u postgres psql
+sudo -u postgres createdb <dbname>
+```
+
 
 ### from source
 ```bash
 git clone https://github.com/hossein601/restaurant_manager.git
 cd restaurant
-pip install -e .
+pip install -e
 ```
 
 ## CLI
