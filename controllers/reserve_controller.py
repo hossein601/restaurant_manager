@@ -1,6 +1,6 @@
-from models.reserve_model import Reserve
-from models.base_model import db
-from models.staff_model import Staff
+from models.reserve import Reserve
+from models.base import db
+from models.staff import Staff
 
 
 class ReserveController:

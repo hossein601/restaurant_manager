@@ -1,19 +1,12 @@
-from models.base_model import db
-from models.chef import Chef
-from models.order_model import Order
-from models.staff_model import Staff
-from models.waiter import Waiters
+from models.base import db
+from models.order import Order
+from models.staff import Staff
 
 
 class StaffController:
     @staticmethod
-    def make_new_staff(name: str, position: str, section=None, specialty=None):
-        if position.lower() == 'chef':
-            new_staff = Chef(name=name, position=position, specialty=specialty)
-        elif position.lower() == 'waiter':
-            new_staff = Waiters(name=name, position=position, section=section)
-        else:
-            new_staff = Staff(name=name, position=position)
+    def make_new_staff(name: str, phone_number: str, position:str):
+        new_staff =Staff(name=name, phone_number=phone_number, position=position)
         db.add(new_staff)
         db.commit()
 
@@ -24,8 +17,9 @@ class StaffController:
         return db.query(Staff).all()
 
     @staticmethod
-    def update_staff(staff_id, name=None, position=None, section=None, specialty=None):
-        staff_member = db.query(Staff).filter_by(id=staff_id).one_or_none()
+    def update_staff(phone_number, name=None,position=None):
+        staff_member = db.query(Staff).filter(Staff.phone_number == phone_number).one_or_none()
+        print(staff_member.phone_number)
         if not staff_member:
             return 'staff not found'
 
@@ -33,25 +27,22 @@ class StaffController:
             staff_member.name = name
         if position:
             staff_member.position = position
-        if section:
-            staff_member.section = section
-        if specialty:
-            staff_member.specialty = specialty
         db.commit()
 
         return staff_member
 
     @staticmethod
-    def delete_staff(staff_id):
-        staff_member = db.query(Staff).filter_by(id=staff_id).one_or_none()
+    def delete_staff(phone_number):
+        staff_member = db.query(Staff).filter_by(phone_number=phone_number).one_or_none()
         if staff_member:
             db.delete(staff_member)
             db.commit()
+
             return 'staff deleted'
 
         return 'staff not found'
 
     @staticmethod
-    def filter_staff_assigned_to_orders(staff_name):
-        staff_order = db.query(Staff,Order).join(Order).filter(Staff.name == staff_name).all()
+    def filter_staff_assigned_to_orders(phone_number):
+        staff_order = db.query(Staff,Order).join(Order).filter(Staff.phone_number == phone_number).all()
         return staff_order
