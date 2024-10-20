@@ -11,11 +11,11 @@ class OrderController:
     def create_order(customer_name, phone_number, menu_items, total_price, staff_id, user_id):
         staff = db.query(Staff).filter_by(id=staff_id).one_or_none()
         if not staff:
-            return f'Staff not found {staff_id}'
+            return f'staff not found {staff_id}'
 
         user = db.query(User).filter_by(id=user_id).one_or_none()
         if not user:
-            return f'User not found {user_id}'
+            return f'user not found {user_id}'
 
         new_order = Order(customer_name=customer_name, phone_number=phone_number, total_price=total_price,
                           staff_id=staff_id, user_id=user_id)
@@ -83,11 +83,11 @@ class OrderController:
         order = db.query(Order).filter_by(id=order_id).one_or_none()
         if not order:
             return f'Order {order_id} not found.'
+
         db.delete(order)
         db.commit()
 
         return f'Order {order_id} deleted .'
-
 
 
 

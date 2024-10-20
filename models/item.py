@@ -1,8 +1,10 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from models.base import Base
+from models.time_record import TimeRecord
 
-class Item(Base):
+
+class Item(TimeRecord,Base):
     __tablename__ = 'item'
 
     id = Column(Integer, primary_key=True)
@@ -10,7 +12,6 @@ class Item(Base):
     price = Column(Integer, nullable=False)
     description = Column(String, nullable=False)
     stock = Column(Integer, nullable=False)
-
     order_items = relationship('OrderItem', back_populates='item')
 
     def decrease_stock(self, quantity):

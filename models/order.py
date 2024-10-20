@@ -1,15 +1,19 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey,DateTime
 from sqlalchemy.orm import relationship
 from models.base import Base
+from datetime import datetime, timezone
 
-class Order(Base):
+from models.time_record import TimeRecord
+
+
+class Order(TimeRecord,Base):
     __tablename__ = 'order'
 
     id = Column(Integer, primary_key=True)
     customer_name = Column(String, nullable=False)
     phone_number = Column(String(15), nullable=False)
     total_price = Column(Integer, nullable=False)
-
+    time = Column(DateTime, default=datetime.now(timezone.utc))
     user_id = Column(Integer, ForeignKey('user.id'))
     staff_id = Column(Integer, ForeignKey('staff.id'))
 
@@ -23,6 +27,5 @@ class Order(Base):
             item = order_item.item
             item.decrease_stock(order_item.quantity)
             total_price += item.price * order_item.quantity
-
         self.total_price = total_price
         return total_price

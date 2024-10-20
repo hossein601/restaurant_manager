@@ -42,9 +42,12 @@ order_subparsers = order_parser.add_subparsers(dest='order_command', help='Order
 order_subparsers.add_parser('list', help='List all orders')
 add_order_parser = order_subparsers.add_parser('add', help='Create a new order')
 add_order_parser.add_argument('customer', type=str, help='Customer name')
+add_order_parser.add_argument('phone_number', type=str, help='Customer phone_number')
 add_order_parser.add_argument('menu_items', type=str, help='List of menu items (comma-separated)')
 add_order_parser.add_argument('total_price', type=float, help='Total price of the order')
 add_order_parser.add_argument('staff_id', type=int, help='Staff ID')
+add_order_parser.add_argument('user_id', type=int, help='user_id')
+
 
 reserve_parser = subparsers.add_parser('reserve', help='Manage reservations')
 reserve_subparsers = reserve_parser.add_subparsers(dest='reserve_command', help='Reservation commands')
@@ -124,7 +127,7 @@ elif args.command == 'order':
         for order in orders:
             print(f'Order {order.order_id}: {order.customer} - {order.total_price}')
     elif args.order_command == 'add':
-        new_order = order_controller.create_order(args.customer, args.menu_items, args.total_price, args.staff_id)
+        new_order = order_controller.create_order(args.customer, args.phone_number,args.menu_items, args.total_price, args.staff_id,args.user_id)
         print(f'Order {new_order} created.')
     elif args.order_command == 'update':
         updated_order = order_controller.update_order(args.id, args.menu_items, args.customer, args.total_price)

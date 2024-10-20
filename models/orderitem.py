@@ -1,8 +1,10 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base import Base
+from models.time_record import TimeRecord
 
-class OrderItem(Base):
+
+class OrderItem(TimeRecord,Base):
     __tablename__ = 'order_item'
 
     id = Column(Integer, primary_key=True)

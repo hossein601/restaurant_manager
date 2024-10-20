@@ -1,6 +1,7 @@
 from models.base import db
 from models.user import User
 
+
 class UserController:
 
     @staticmethod
@@ -9,12 +10,23 @@ class UserController:
         db.add(new_user)
         db.commit()
 
+        return f'user {name} created .'
+
     @staticmethod
     def get_all_users():
-        user = db.query(User).all()
+        users = db.query(User).all()
+        if users:
+            return users
+
+        return 'not user found.'
+
+    @staticmethod
+    def get_user_by_phone_number(phone_number):
+        user = db.query(User).filter(User.phone_number == phone_number).one_or_none()
         if user:
             return user
-        return 'There is not user'
+
+        return 'user not found.'
 
     @staticmethod
     def update_user_by_phone_number(phone_number, name=None, wallet=None):
@@ -22,11 +34,12 @@ class UserController:
         if user:
             if name:
                 user.name = name
-            if wallet:
+            if wallet is not None:
                 user.wallet = wallet
             db.commit()
-            return f'User has been updated'
-        return f'User not found'
+            return f'user {user.name} updated.'
+
+        return f'user not found.'
 
     @staticmethod
     def delete_user_by_phone_number(phone_number):
@@ -34,6 +47,35 @@ class UserController:
         if user:
             db.delete(user)
             db.commit()
-            return f'User deleted'
-        return f'User not found'
+            return f'user with {user.name}:{user,phone_number}  been deleted.'
 
+        return f'user not found.'
+
+    @staticmethod
+    def add_wallet(phone_number, amount):
+        user = db.query(User).filter(User.phone_number == phone_number).one_or_none()
+        if user:
+            user.wallet += amount
+            db.commit()
+            return f'{amount} add {user.phone_number}\ {user.wallet}'
+        return 'user not found.'
+
+    @staticmethod
+    def decrease_wallet(phone_number, amount):
+        user = db.query(User).filter(User.phone_number == phone_number).one_or_none()
+        if user:
+            if user.wallet >= amount:
+                user.wallet -= amount
+                db.commit()
+
+                return f'decrease_wallet{user.name}:{user.wallet}'
+
+
+    @staticmethod
+    def get_wallet(phone_number):
+        user = db.query(User).filter(User.phone_number == phone_number).one_or_none()
+        if user:
+            user.update_time()
+            return f'Wallet balance for {user.name}: {user.wallet}'
+
+        return 'User not found.'
