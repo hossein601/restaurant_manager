@@ -1,11 +1,11 @@
-__all__ = ['base','user','staff','reserve','orderitem','item','order', 'time_record.py']
+__all__ = ['base','user','staff','reserve', 'order_item.py', 'item', 'order', 'time_record.py']
 
 import models
 import models.base
 import models.user
 import models.staff
 import models.reserve
-import models.orderitem
+import models.order_item
 import models.item
 import models.time_record
 import models.order

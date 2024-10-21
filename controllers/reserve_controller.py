@@ -13,6 +13,7 @@ class ReserveController:
         new_reserve = Reserve(name=name, numbers=numbers, duration=duration, staff_id=staff_id)
         db.add(new_reserve)
         db.commit()
+
         return new_reserve
 
     @staticmethod
