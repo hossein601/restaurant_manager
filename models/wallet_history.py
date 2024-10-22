@@ -4,9 +4,7 @@ from sqlalchemy.orm import relationship
 from models.base import Base
 from sqlalchemy import Column, func, text, Datetime, Integer
 from datetime import datetime
-from pydantic import BaseModel
-
-class Type(Enum,BaseModel):
+class Type(Enum):
     increase = 1
     decrease = 2
 

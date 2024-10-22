@@ -64,6 +64,7 @@ class UserController:
             db.add(new_wallet_history)
             db.commit()
             return f'{amount} add {user.phone_number}\ {user.wallet}'
+
         return 'user not found.'
 
     @staticmethod
@@ -74,10 +75,9 @@ class UserController:
                 user.wallet -= amount
                 db.commit()
                 new_wallet_history = WalletHistory(type='decrease', user_id=user.id,
-                                                   old_balance=user.wallet - amount, new_balance=user.wallet)
+                                                   old_balance=user.wallet + amount, new_balance=user.wallet)
                 db.add(new_wallet_history)
                 db.commit()
-
 
                 return f'decrease_wallet{user.name}:{user.wallet}'
 
