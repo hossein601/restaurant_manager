@@ -1,4 +1,4 @@
-__all__ = ['base','user','staff','reserve', 'order_item.py', 'item', 'order', 'time_record.py']
+__all__ = ['base','user','staff','reserve', 'wallet_history.py', 'item', 'order', 'time_record.py']
 
 import models
 import models.base

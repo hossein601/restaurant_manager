@@ -1,5 +1,6 @@
 from models.base import db
 from models.user import User
+from models.wallet_history import WalletHistory
 
 
 class UserController:
@@ -56,6 +57,11 @@ class UserController:
         user = db.query(User).filter(User.phone_number == phone_number).one_or_none()
         if user:
             user.wallet += amount
+            db.flush()
+
+            new_wallet_history = WalletHistory(type = 'increase',user_id=user.id,
+                                               old_balance=user.wallet-amount,new_balance=user.wallet)
+            db.add(new_wallet_history)
             db.commit()
             return f'{amount} add {user.phone_number}\ {user.wallet}'
         return 'user not found.'
@@ -67,6 +73,11 @@ class UserController:
             if user.wallet >= amount:
                 user.wallet -= amount
                 db.commit()
+                new_wallet_history = WalletHistory(type='decrease', user_id=user.id,
+                                                   old_balance=user.wallet - amount, new_balance=user.wallet)
+                db.add(new_wallet_history)
+                db.commit()
+
 
                 return f'decrease_wallet{user.name}:{user.wallet}'
 

@@ -13,9 +13,6 @@ class Reserve(TimeRecord,Base):
     name = Column(String, nullable=False)
     count = Column(Integer, nullable=False)
 
-    created_at = Column(DateTime, default=func.now())
-    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
-
     user_id = Column(Integer, ForeignKey('user.id'))
     staff_id = Column(Integer, ForeignKey('staff.id'))
 
