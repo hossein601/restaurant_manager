@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey,DateTime
 from sqlalchemy.orm import relationship
 from models.base import Base
 from datetime import datetime, timezone
-
 from models.time_record import TimeRecord
 
 
