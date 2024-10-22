@@ -5,8 +5,8 @@ from models.base import Base
 from sqlalchemy import Column, func, text, Datetime, Integer
 from datetime import datetime
 class Type(Enum):
-    increase = 'increase'
-    decrease = 'decrease'
+    increase = 1
+    decrease = 2
 
 class WalletHistory( Base):
     __tablename__ = 'wallet_history'
